@@ -35,38 +35,12 @@
           
         }
 
-        handleSubmit = (e) => {
-            e.preventDefault();
-            console.log('submit');
-
-            // change on submit
-            this.setState({
-                form_input: {
-                    name: document.getElementById("input_name").value,
-                    age: document.getElementById("input_age_submit").value
-                }
-            })            
-            
-        }
-
-        handleChange = (e) => {
-            console.log(e.target.value);
-            console.log(e)
-            // DO NOT!
-            //this.state.form_input.name = e.target.value
-
-            // change on each text change
-            this.setState({
-                form_input: {
-                    age: e.target.value
-                }
-            })
-        }
-
+        //when double clicking its alerts you with congrats
         handleDoubleClick = (e) => {
           alert("Congrats!!!!!")
         }
 
+        //function that says what are the mouse cordinate
         handleonMouseMove = (e) => {
           this.setState({
                 cordinates: {
@@ -76,6 +50,7 @@
             })
         }
 
+        //function that resets the mouse cordinate
         handleMouseOut = (e) => {
           this.setState({
                 cordinates: {
@@ -85,29 +60,29 @@
             })
         }
 
+        //submiting form
         formSubmit = (e) => {
+
+          //preventing the submit button to refresh the page
           e.preventDefault()
-          let value = e.target.myCheckbox.checked ? "yes" : "no";
+
+          //taking the check box and checking if its checked if do so saying yes else not 
+          let vegeterianChecker = e.target.myCheckbox.checked ? "yes" : "no";
+
+          //puting the value of the radio button into a variable
           let genderValue = e.target.myRadio.value
 
+          //seting the member's info into the state
           this.setState({
             form_input: {
               name: document.getElementById("input_name").value,
-              age: 23,
-              vegetarian: value,
+              vegetarian: vegeterianChecker,
               birthday: document.getElementById("input_birthday").value,
               country: document.getElementById("countries").value,
               gender: genderValue
             }
           })
         }
-        /*onChangeValue = (e) => 
-        this.setState({
-          form_input: {
-            gender: e.target.value
-          }
-        })*/
-
         render()
         {
           return(
@@ -117,35 +92,12 @@
               <p>my birthday at {this.state.form_input.birthday} i am from {this.state.form_input.country}</p>
               <p>my gender is {this.state.form_input.gender}</p>
               
-              <form onSubmit={this.handleSubmit}>
-                <input type="text" id="input_name1"
-                  //onChange={this.handleChange}
-                  //value={this.state.form_input.name} 
-                  />
-                  <br />
-                <input type="number" id="input_age_submit"/>
-                <br />
-                <input type="number" onChange={this.handleChange} />
-                <br />
-                <button type="submit">Submit</button>
-                <br />
-                <hr />
-                <button type="submit" onDoubleClick={this.handleDoubleClick}>Double Click Me</button>
-                <br />
-                <hr />
-                <p>mouse cordinate are X: {this.state.cordinates.x} , Y is {this.state.cordinates.y}</p>
-                <button type="submit" onMouseMove={this.handleonMouseMove} onMouseOut={this.handleMouseOut} style = {{height: 300, width: 300}}
-                >Detect X and Y</button>
-              </form>
-                <hr />
-
+    
               <form  onSubmit={this.formSubmit}>
                 <label for="input_name">name:</label> &nbsp;
                 <input type="text" id="input_name"/>
                 <br />
-
                 <label>vegeterian <input type="checkbox" name="myCheckbox" /></label>
-                
                 <br />
                 <label for="input_birthday">birthday:</label> &nbsp;
                 <input type="date" id="input_birthday"/>
@@ -170,6 +122,15 @@
                 <button type="submit" >submit</button>
 
               </form>
+
+              <hr />
+                <button type="submit" onDoubleClick={this.handleDoubleClick}>Double Click Me</button>
+                <br />
+                <hr />
+                <p>mouse cordinate are X: {this.state.cordinates.x} , Y is {this.state.cordinates.y}</p>
+                <button type="submit" onMouseMove={this.handleonMouseMove} onMouseOut={this.handleMouseOut} style = {{height: 300, width: 300}}
+                >Detect X and Y</button>
+                <hr />
             </div>
           )
         }
